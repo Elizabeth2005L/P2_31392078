@@ -35,7 +35,7 @@
                         class="peluqueria" alt=""></a>
                 </div>
                 <div class="landing-text">
-                    <h2>Bienvenido a nuestra peluquería</h2>
+                    <h2 class="text-balanced">Bienvenido a Nuestro Salon de Belleza</h2>
                     <p>
                         "Resalta tu Belleza y Celebra tu Esencia."
                     </p>
@@ -73,7 +73,7 @@
                         <li class="list"> <span class="punto"></span>Vaporizacion</li>
                         <li class="list"> <span class="punto"></span>Mascarilla</li>
                         <li class="list"> <span class="punto"></span>Extraccion de puntos negros</li>
-                        <li class="list"> <span class="punto"></span>Protecror Solar</li>
+                        <li class="list"> <span class="punto"></span>Protector Solar</li>
                         <li class="list"> <span class="punto"></span>Drenaje Linfatico</li>
                     </div>
                 </div>
@@ -87,6 +87,52 @@
                     <img class="insta" src="https://1000marcas.net/wp-content/uploads/2019/11/ig-logo.png" alt="">
                 </a>
             </div>
+            <div>
+<div>
+    <div class="form-card">
+        <form id="contact"> 
+            <label>
+                Correo
+                <input name="email" type="text">
+            </label>
+            <label>
+                Nombre
+                <input name="name" type="text">
+            </label>
+        <label>
+            Comentario
+            <input name="comment" type="text">
+        </label>
+            <button type="submit"> 
+                Enviar 
+            </button>
+        </form>
+    </div>
+</div>
+
+                <script>
+                    const form = document.getElementById('contact')
+
+                    form.addEventListener("submit", (event) => {
+                        event.preventDefault()
+                        const data = Object.fromEntries(
+                            new FormData(event.target)
+                        )
+                        console.log(data)
+                        enviarDatos(data)
+                    })
+
+                    async function enviarDatos (data) {
+                        await fetch("/addForm", {
+                            method: "POST",
+                            headers: {
+                                'Content-Type': 'application/json',
+                            },
+                            body: JSON.stringify(data)
+                        })
+                    }
+                </script>
+            </div>
             <footer>
 
             </footer>
@@ -96,6 +142,45 @@
 </html>
 
 <style>
+    .form-card {
+        padding: 20px;
+        margin: 0 auto;
+        max-width: 600px;
+
+        & form {
+            flex-direction: column;
+            display: flex;
+
+            & label {
+                display: flex;
+                margin-top: 14px;
+                flex-direction: column;
+
+                & input {
+                    margin-top: 8px;
+                    padding: 10px;
+                    border: sold #686868 2px;
+                    border-radius: 10px
+                }
+            };
+
+            & button {
+                margin-top: 40px;
+                background-color: #8f204d;
+                cursor: pointer;
+                color: #fff;
+                padding: 12px;
+                font-size: 16px;
+                border-radius: 12px;
+                border: transparent;
+
+                &:hover {
+                    background-color: #bd0c6d;
+                }
+            }
+        }
+    }
+
     .insta {
         width: auto;
         height: 100px;
@@ -269,6 +354,10 @@
 
     .logo {
         height: 60px;
+    }
+
+    .text-balanced {
+        text-wrap: balance;
     }
 
     * {
